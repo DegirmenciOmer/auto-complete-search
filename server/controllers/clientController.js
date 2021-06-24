@@ -16,14 +16,14 @@ const getClientById = (req, res) => {
 }
 
 const searchClient = (req, res) => {
-  let { value } = req.query
-  console.log(value)
+  const { q } = req.query
+  console.log(q)
 
   const output = []
-  if (value) {
-    clientData.forEach((item) => {
-      item.first_name.toLowerCase().startsWith(value.toLowerCase()) &&
-        output.push(item)
+  if (q) {
+    clientData.forEach((obj) => {
+      obj.first_name.toLowerCase().startsWith(q.toLowerCase()) &&
+        output.push(obj)
     })
     res.json(output)
   } else {
