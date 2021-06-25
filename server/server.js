@@ -3,8 +3,9 @@ import dotenv from 'dotenv'
 import path from 'path'
 import {
   getClientById,
-  getClients,
-  searchClient,
+  searchClientByEmail,
+  searchClientByFirstName,
+  searchClientByLastName,
 } from './controllers/clientController.js'
 
 const app = express()
@@ -30,9 +31,10 @@ dotenv.config()
 
 const PORT = process.env.PORT || 8000
 
-app.get('/', getClients)
 app.get('/single/:id', getClientById)
-app.get('/search', searchClient)
+app.get('/search/first_name', searchClientByFirstName)
+app.get('/search/email', searchClientByEmail)
+app.get('/search/last_name', searchClientByLastName)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, './client/build')))

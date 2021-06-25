@@ -1,6 +1,6 @@
 export default async function fetchData(url, setLoading, setError) {
   try {
-    const fetchUrl = `${url}`
+    const fetchUrl = url
     const res = await fetch(fetchUrl)
     setLoading(true)
 

@@ -15,7 +15,7 @@ const HomePage = () => {
   useEffect(() => {
     if (searchQuery.length > 1) {
       fetchData(URL, setLoading, setError).then((data) => {
-        !data ? new Error('Oops...') : setClients(data.results)
+        !data ? new Error('Oops...') : console.log(data)
       })
     } else {
       return
@@ -34,14 +34,6 @@ const HomePage = () => {
         </Grid.Row>
       )}
       {error && <p>{error}</p>}
-
-      {clients && (
-        <ul>
-          {clients.map((client) => {
-            return <li>{client.first_name}</li>
-          })}
-        </ul>
-      )}
     </div>
   )
 }
