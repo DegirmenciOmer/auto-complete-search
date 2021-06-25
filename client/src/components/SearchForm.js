@@ -7,17 +7,19 @@ const SearchForm = ({ searchQuery, setSearchQuery }) => {
   }
 
   return (
-    <Form>
-      <Form.Group>
-        <Form.Input
-          placeholder='Search for clients'
-          name='name'
-          value={searchQuery}
-          onChange={onChange}
-          autoComplete='off'
-        />
-      </Form.Group>
-    </Form>
+    <>
+      <Form>
+        <Form.Group>
+          <Form.Input
+            placeholder='Search for options'
+            name='name'
+            value={searchQuery}
+            onChange={onChange}
+            autoComplete='off'
+          />
+        </Form.Group>
+      </Form>
+    </>
   )
 }
 
