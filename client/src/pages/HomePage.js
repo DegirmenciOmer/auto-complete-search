@@ -14,16 +14,16 @@ const HomePage = () => {
   const URL = `http://localhost:5000/search/first_name/?q=${searchQuery}`
 
   useEffect(() => {
-    if (searchQuery.length > 1) {
+    if (searchQuery.length > 0) {
       fetchData(URL, setLoading, setError).then((data) => {
         !data ? new Error('Oops...') : setClients(data)
       })
+    } else if (searchQuery.length === 0) {
+      setClients('')
     } else {
       return
     }
   }, [searchQuery])
-
-  const onChange = (val) => setValue(val)
 
   return (
     <div className='centered'>
@@ -34,10 +34,18 @@ const HomePage = () => {
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           prompt='Search...'
-          onChange={onChange}
+          setValue={setValue}
+          onChange={(val) => setValue(val)}
           value={value}
         />
       </Grid.Row>
+
+      <a
+        target='_blank'
+        href='https://www.youtube.com/watch?v=elC357w9VOA&t=1237s'
+      >
+        tutorial
+      </a>
 
       {loading && (
         <Grid.Row>

@@ -1,3 +1,10 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .App {
   text-align: center;
 }
@@ -6,6 +13,7 @@
   position: relative;
   color: #333;
   cursor: default;
+  width: 250px;
 }
 
 .dropdown .arrow {
@@ -27,7 +35,7 @@
   border-width: 0 5px 5px;
 }
 
-.dropdown .selected-value {
+.dropdown .selected-value input {
   line-height: 1.5;
   font-size: 1rem;
   background-color: #fff;
