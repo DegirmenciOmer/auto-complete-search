@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useKey } from '../util/useKey'
 
 const Dropdown = ({
   options,
@@ -19,7 +18,7 @@ const Dropdown = ({
     return () => {
       document.removeEventListener('click', toggleOptions)
     }
-  }, [])
+  }, [cursor])
 
   function toggleOptions(e) {
     setOpen(e && e.target === inputRef.current)
@@ -27,31 +26,34 @@ const Dropdown = ({
   }
 
   const keyboardNavigation = (e) => {
-    if (e.key === 'ArrowDown') {
-      console.log({ cursor })
-      open
-        ? setCursor((c) => (c < options.length - 1 ? c + 1 : c))
-        : setOpen(true)
-    }
+    switch (e.key) {
+      case 'ArrowDown':
+        open
+          ? setCursor((c) => (c < options.length - 1 ? c + 1 : 0))
+          : setOpen(true)
+        break
 
-    if (e.key === 'ArrowUp') {
-      setCursor((c) => (c > 0 ? c - 1 : 0))
-      console.log({ cursor })
-    }
+      case 'ArrowUp':
+        setCursor((c) => (c > 0 ? c - 1 : options.length - 0))
+        break
 
-    if (e.key === 'Escape') {
-      console.log('escape')
-      setOpen(false)
-    }
+      case 'Escape':
+        setOpen(false)
+        break
 
-    if (e.key === 'Enter' && cursor > 0) {
-      console.log('Entered', options[cursor].first_name)
-      setValue(options[1].first_name)
-      setOpen(false)
-      setCursor(0)
+      case 'Enter':
+        setSearchQuery(options[cursor].first_name)
+        setValue(options[cursor])
+        setOpen(false)
+        setCursor(0)
+
+        break
+
+      default:
+        break
     }
   }
-
+  value && console.log({ value })
   return (
     <div className='dropdown'>
       <div className='control'>
@@ -60,7 +62,9 @@ const Dropdown = ({
             ref={inputRef}
             placeholder={value ? value.first_name : prompt}
             type='text'
-            value={value ? value.first_name : searchQuery}
+            value={
+              value ? `${value.first_name} ${value.last_name}` : searchQuery
+            }
             onChange={(e) => {
               !open && setOpen(true)
               setSearchQuery(e.target.value)
@@ -77,16 +81,17 @@ const Dropdown = ({
             <div
               className={`option ${
                 (value === option && 'selected') ||
-                (value === options[cursor] && 'selected')
+                (option === options[cursor] && 'selected')
               }`}
               onClick={() => {
-                setSearchQuery('')
+                setSearchQuery(option)
                 setValue(option)
                 setOpen(false)
+                setCursor(0)
               }}
               key={option.id.$oid}
             >
-              {option.first_name}
+              {option.first_name} {option.last_name}
             </div>
           ))}
         <div className='option'></div>

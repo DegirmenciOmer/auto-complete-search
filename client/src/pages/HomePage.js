@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Loader } from 'semantic-ui-react'
+import ClientCard from '../components/ClientCard'
 //import SearchForm from '../components/SearchForm'
 import Dropdown from '../components/Dropdown'
 import fetchData from '../util/fetchData'
@@ -27,7 +28,6 @@ const HomePage = () => {
 
   return (
     <div className='centered'>
-      <Grid.Row></Grid.Row>
       <Grid.Row>
         <Dropdown
           options={clients}
@@ -39,16 +39,11 @@ const HomePage = () => {
           value={value}
         />
       </Grid.Row>
-
-      <a
-        target='_blank'
-        href='https://www.youtube.com/watch?v=elC357w9VOA&t=1237s'
-      >
-        <p>tutorial1</p>
-      </a>
-      <a target='_blank' href='https://www.youtube.com/watch?v=G2QyeafA3gw'>
-        <p>tutorial2</p>
-      </a>
+      {value && (
+        <Grid.Row>
+          <ClientCard client={value} />
+        </Grid.Row>
+      )}
 
       {loading && (
         <Grid.Row>
