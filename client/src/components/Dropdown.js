@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Loader } from 'semantic-ui-react'
 
 const Dropdown = ({
   options,
@@ -13,14 +14,14 @@ const Dropdown = ({
   const inputRef = useRef(null)
 
   useEffect(() => {
-    document.addEventListener('click', toggleOptions)
+    document.addEventListener('click', toggleDropdown)
 
     return () => {
-      document.removeEventListener('click', toggleOptions)
+      document.removeEventListener('click', toggleDropdown)
     }
   }, [cursor])
 
-  function toggleOptions(e) {
+  function toggleDropdown(e) {
     setOpen(e && e.target === inputRef.current)
     //setOpen(options.length > 0 && e && e.target === inputRef.current)
   }
@@ -42,18 +43,20 @@ const Dropdown = ({
         break
 
       case 'Enter':
-        setSearchQuery(options[cursor].first_name)
-        setValue(options[cursor])
-        setOpen(false)
-        setCursor(0)
-
+        handleSelect(options[cursor], options[cursor].first_name)
         break
 
       default:
         break
     }
   }
-  value && console.log({ value })
+
+  function handleSelect(val, str) {
+    setSearchQuery(str)
+    setValue(val)
+    setOpen(false)
+    setCursor(0)
+  }
   return (
     <div className='dropdown'>
       <div className='control'>
@@ -68,7 +71,7 @@ const Dropdown = ({
             onChange={(e) => {
               !open && setOpen(true)
               setSearchQuery(e.target.value)
-              setValue('')
+              setValue(null)
             }}
             onKeyDown={(e) => keyboardNavigation(e)}
           />
@@ -84,17 +87,19 @@ const Dropdown = ({
                 (option === options[cursor] && 'selected')
               }`}
               onClick={() => {
-                setSearchQuery(option)
-                setValue(option)
-                setOpen(false)
-                setCursor(0)
+                handleSelect(option, option.first_name)
               }}
               key={option.id.$oid}
             >
               {option.first_name} {option.last_name}
             </div>
           ))}
-        <div className='option'></div>
+
+        {searchQuery.length > 0 && !options && (
+          <div>
+            <Loader active inline='centered' />
+          </div>
+        )}
       </div>
     </div>
   )

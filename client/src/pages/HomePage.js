@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Loader } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 import ClientCard from '../components/ClientCard'
 //import SearchForm from '../components/SearchForm'
 import Dropdown from '../components/Dropdown'
@@ -28,7 +28,7 @@ const HomePage = () => {
 
   return (
     <div className='centered'>
-      <Grid.Row>
+      <div>
         <Dropdown
           options={clients}
           searchQuery={searchQuery}
@@ -38,17 +38,17 @@ const HomePage = () => {
           onChange={(val) => setValue(val)}
           value={value}
         />
-      </Grid.Row>
+      </div>
       {value && (
-        <Grid.Row>
+        <div>
           <ClientCard client={value} />
-        </Grid.Row>
+        </div>
       )}
 
       {loading && (
-        <Grid.Row>
+        <div>
           <Loader active inline='centered' />
-        </Grid.Row>
+        </div>
       )}
       {error && <p>{error}</p>}
     </div>
