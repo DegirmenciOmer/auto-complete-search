@@ -44,7 +44,10 @@ const HomePage = () => {
         target='_blank'
         href='https://www.youtube.com/watch?v=elC357w9VOA&t=1237s'
       >
-        tutorial
+        <p>tutorial1</p>
+      </a>
+      <a target='_blank' href='https://www.youtube.com/watch?v=G2QyeafA3gw'>
+        <p>tutorial2</p>
       </a>
 
       {loading && (
