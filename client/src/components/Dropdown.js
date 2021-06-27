@@ -12,6 +12,7 @@ const Dropdown = ({
   const [open, setOpen] = useState(false)
   const [cursor, setCursor] = useState(0)
   const inputRef = useRef(null)
+  console.log({ cursor })
 
   useEffect(() => {
     document.addEventListener('click', toggleDropdown)
@@ -43,7 +44,9 @@ const Dropdown = ({
         break
 
       case 'Enter':
-        handleSelect(options[cursor], options[cursor].first_name)
+        options &&
+          cursor > -1 &&
+          handleSelect(options[cursor], options[cursor].first_name)
         break
 
       default:
@@ -74,6 +77,8 @@ const Dropdown = ({
               setValue(null)
             }}
             onKeyDown={(e) => keyboardNavigation(e)}
+            onMouseOver={() => setCursor(0)}
+            onMouseOut={() => setCursor(0)}
           />
         </div>
         <div className={`arrow ${open && 'open'}`}></div>
