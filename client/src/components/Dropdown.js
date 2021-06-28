@@ -12,7 +12,6 @@ const Dropdown = ({
   const [open, setOpen] = useState(false)
   const [cursor, setCursor] = useState(0)
   const inputRef = useRef(null)
-  console.log({ cursor })
 
   useEffect(() => {
     document.addEventListener('click', toggleDropdown)
