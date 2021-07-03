@@ -19,7 +19,7 @@ const Dropdown = ({
     return () => {
       document.removeEventListener('click', toggleDropdown)
     }
-  }, [cursor])
+  }, [])
 
   function toggleDropdown(e) {
     setOpen(e && e.target === inputRef.current)
@@ -30,12 +30,12 @@ const Dropdown = ({
     switch (e.key) {
       case 'ArrowDown':
         open
-          ? setCursor((c) => (c < options.length - 1 ? c + 1 : 0))
+          ? setCursor((cur) => (cur < options.length - 1 ? cur + 1 : 0))
           : setOpen(true)
         break
 
       case 'ArrowUp':
-        setCursor((c) => (c > 0 ? c - 1 : options.length - 0))
+        setCursor((cur) => (cur > 0 ? cur - 1 : options.length - 0))
         break
 
       case 'Escape':
@@ -43,18 +43,16 @@ const Dropdown = ({
         break
 
       case 'Enter':
-        options &&
-          cursor > -1 &&
-          handleSelect(options[cursor], options[cursor].first_name)
+        options && cursor > -1 && handleSelect(options[cursor])
         break
 
       default:
         break
     }
   }
-
-  function handleSelect(val, str) {
-    setSearchQuery(str)
+  //debouncing
+  function handleSelect(val) {
+    setSearchQuery('')
     setValue(val)
     setOpen(false)
     setCursor(0)
@@ -91,7 +89,7 @@ const Dropdown = ({
                 (option === options[cursor] && 'selected')
               }`}
               onClick={() => {
-                handleSelect(option, option.first_name)
+                handleSelect(option)
               }}
               key={option.id.$oid}
             >

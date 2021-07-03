@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Loader } from 'semantic-ui-react'
 import ClientCard from '../components/ClientCard'
-//import SearchForm from '../components/SearchForm'
 import Dropdown from '../components/Dropdown'
 import fetchData from '../util/fetchData'
 
@@ -25,6 +24,7 @@ const HomePage = () => {
       return
     }
   }, [searchQuery])
+  console.log(error)
 
   return (
     <div className='centered'>

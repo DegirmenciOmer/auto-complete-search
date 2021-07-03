@@ -1,5 +1,4 @@
 import express from 'express'
-import dotenv from 'dotenv'
 import path from 'path'
 import {
   getClientById,
@@ -11,13 +10,13 @@ import {
 const app = express()
 
 app.use(express.json())
+
 const __dirname = path.resolve()
 
-const LOCALHOST_API = 'http://localhost:3000'
-const HEROKU_API = 'https://klippa--tech-calculation-game.herokuapp.com'
+const LOCALHOST = 'http://localhost:3000'
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', LOCALHOST_API)
+  res.setHeader('Access-Control-Allow-Origin', LOCALHOST)
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
   res.setHeader(
@@ -27,9 +26,7 @@ app.use((req, res, next) => {
   next()
 })
 
-dotenv.config()
-
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 5000
 
 app.get('/single/:id', getClientById)
 app.get('/search/first_name', searchClientByFirstName)
