@@ -27,7 +27,8 @@ const HomePage = () => {
   console.log(error)
 
   return (
-    <div className='centered'>
+    <div data-testid='container' className='centered'>
+      <h1>Dropdown App</h1>
       <div>
         <Dropdown
           options={clients}

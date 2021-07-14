@@ -5,8 +5,13 @@ body{
 
 }
 
+.root{
+  width: 400px;
+}
+
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .dropdown {

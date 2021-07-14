@@ -52,16 +52,21 @@ const Dropdown = ({
   }
   //debouncing
   function handleSelect(val) {
-    setSearchQuery('')
-    setValue(val)
-    setOpen(false)
-    setCursor(0)
+    try {
+      setSearchQuery('')
+      setValue(val)
+      setOpen(false)
+      setCursor(0)
+    } catch (err) {
+      console.error(err)
+    }
   }
   return (
     <div className='dropdown'>
       <div className='control'>
         <div className='selected-value'>
           <input
+            data-testid='input'
             ref={inputRef}
             placeholder={value ? value.first_name : prompt}
             type='text'
@@ -78,12 +83,13 @@ const Dropdown = ({
             onMouseOut={() => setCursor(0)}
           />
         </div>
-        <div className={`arrow ${open && 'open'}`}></div>
+        <div data-testid='arrow' className={`arrow ${open && 'open'}`}></div>
       </div>
-      <div className={`options ${open && 'open'}`}>
+      <div data-testid='options' className={`options ${open && 'open'}`}>
         {options &&
-          options.map((option) => (
+          options.map((option, index) => (
             <div
+              data-testid={`opt${index}`}
               className={`option ${
                 (value === option && 'selected') ||
                 (option === options[cursor] && 'selected')
