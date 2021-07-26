@@ -24,7 +24,6 @@ const HomePage = () => {
       return
     }
   }, [searchQuery])
-  console.log(error)
 
   return (
     <div data-testid='container' className='centered'>

@@ -10,8 +10,8 @@ export default async function fetchData(url, setLoading, setError) {
 
     return data
   } catch (err) {
-    console.log(err)
+    console.log(err.TypeError)
     setLoading(false)
-    setError(err)
+    setError(err.TypeError)
   }
 }

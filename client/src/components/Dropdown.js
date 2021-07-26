@@ -61,6 +61,7 @@ const Dropdown = ({
       console.error(err)
     }
   }
+  console.log(options)
   return (
     <div className='dropdown'>
       <div className='control'>

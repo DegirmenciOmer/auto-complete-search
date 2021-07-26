@@ -1,10 +1,20 @@
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  findByText,
+} from '@testing-library/react'
 
 import HomePage from '../pages/HomePage'
 
-describe('input tests', () => {
-  test('input placeholder is Search...', () => {
+describe('HomePage', () => {
+  it('runs without crashing', () => {
+    render(<HomePage />)
+  })
+
+  it('input placeholder is Search...', () => {
     const { getByTestId } = render(<HomePage />)
     const inputEl = getByTestId('input')
     expect(inputEl.placeholder).toBe('Search...')
@@ -52,10 +62,9 @@ describe('input tests', () => {
     fireEvent.click(containerEl)
     expect(arrowEl.className).toBe('arrow false')
     expect(optionsEl.className).toBe('options false')
-    screen.debug()
   })
 
-  test(' onKeyDown event', async () => {
+  test(' onKeyDown event: navigate through fetched items and select', async () => {
     const { getByTestId, getByText } = render(<HomePage />)
     const inputEl = getByTestId('input')
     const optionsEl = getByTestId('options')
@@ -64,23 +73,28 @@ describe('input tests', () => {
     fireEvent.change(inputEl, { target: { value: 'abe' } })
 
     expect(inputEl.value).toBe('abe')
-    fireEvent.keyDown(inputEl, {
-      key: 'ArrowDown',
-      code: 40,
-    })
-    fireEvent.keyDown(inputEl, {
-      key: 'Enter',
-      code: 13,
-    })
 
-    const optionEl = waitFor(() => getByTestId('opt0'))
-    expect(optionEl.textContent).toBe('Abelard')
+    const optionEl = await waitFor(() => getByText('Abelard Markova'))
+    waitFor(() =>
+      fireEvent.keyDown(optionEl, {
+        key: 'Enter',
+        code: 13,
+      })
+    )
+
+    expect(inputEl.textContent).toBe('')
+    expect(await optionEl.textContent).toBe('Abelard Markova')
 
     screen.debug()
   })
 })
 
-//test states
+describe('HomePage', () => {
+  it('runs without crashing', () => {
+    render(<HomePage />)
+  })
+})
+
 //no data
 //when running without server
 //enter many typings in input
