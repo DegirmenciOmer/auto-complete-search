@@ -53,7 +53,7 @@ const Dropdown = ({
         break
     }
   }
-  value && console.log({ value })
+  
   return (
     <div className='dropdown'>
       <div className='control'>
@@ -78,8 +78,7 @@ const Dropdown = ({
       <div className={`options ${open && 'open'}`}>
         {options &&
           options.map((option) => (
-            <div
-              className={`option ${
+            <div e={`option ${
                 (value === option && 'selected') ||
                 (option === options[cursor] && 'selected')
               }`}
@@ -89,7 +88,7 @@ const Dropdown = ({
                 setOpen(false)
                 setCursor(0)
               }}
-              key={option.id.$oid}
+              key={option.id}
             >
               {option.first_name} {option.last_name}
             </div>

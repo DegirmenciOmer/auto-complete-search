@@ -12,7 +12,7 @@ const HomePage = () => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const URL = `http://localhost:5000/search/first_name/?q=${searchQuery}`
+  const URL = `http://localhost:8000/search/first_name/?q=${searchQuery}`
 
   useEffect(() => {
     if (searchQuery.length > 0) {

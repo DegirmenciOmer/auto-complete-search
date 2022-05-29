@@ -1,7 +1,7 @@
 import clientData from '../data/clients.js'
 
 const getClientById = (req, res) => {
-  const client = clientData.find((item) => req.params.id === item.id.$oid)
+  const client = clientData.find((item) => req.params.id === item.id)
   if (client) {
     res.json(client)
   } else {

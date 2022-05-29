@@ -96,7 +96,7 @@ const AutoComplete = ({ data, onSelect }) => {
         <ul className='list-group' ref={searchResultRef}>
           {suggestions.map((item, idx) => (
             <AutoCompleteItem
-              key={item.name}
+              key={item.id}
               onSelectItem={() => {
                 hideSuggestion()
                 setSearch(item.name)
