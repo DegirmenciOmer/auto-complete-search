@@ -1,17 +1,16 @@
 export default async function fetchData(url, setLoading, setError) {
   try {
-    const fetchUrl = url
-    const res = await fetch(fetchUrl)
-    setLoading(true)
+    const fetchUrl = url;
+    const res = await fetch(fetchUrl);
+    setLoading(true);
 
-    const data = await res.json()
+    const data = await res.json();
 
-    setLoading(false)
+    setLoading(false);
 
-    return data
+    return data;
   } catch (err) {
-    console.log({ err })
-    setLoading(false)
-    setError(err)
+    setLoading(false);
+    setError(err);
   }
 }
