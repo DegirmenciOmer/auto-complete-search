@@ -12,10 +12,11 @@ const app = express();
 
 app.use(express.json());
 const __dirname = path.resolve();
-const CLIENT = process.env.PORT
-  ? "https://coolautocomplete.netlify.app"
-  : "http://localhost:3000";
-
+const CLIENT = "https://coolautocomplete.netlify.app";
+// const CLIENT = process.env.PORT
+//   ? "https://coolautocomplete.netlify.app"
+//   : "http://localhost:3000";
+console.log({ CLIENT });
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", CLIENT);
   res.setHeader("Access-Control-Allow-Credentials", "true");
